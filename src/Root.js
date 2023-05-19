@@ -1,9 +1,15 @@
+import { RecoilRoot } from "recoil";
 import App from "./App";
+import { HashRouter } from "react-router-dom";
 
 export default function Root() {
   return (
     <>
-      <App />
+      <RecoilRoot>
+        <HashRouter>
+          <App />
+        </HashRouter>
+      </RecoilRoot>
     </>
   );
 }

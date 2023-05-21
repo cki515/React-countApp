@@ -1,13 +1,21 @@
 import { Button, Modal } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { myConfetti } from "../state/main";
 import { useRecordsState } from "../hooks/useRecord";
-import useNoticeSnackbarState from "../hooks/useNotice";
 
-export function RecordModal({ state }) {
+export function RecordModal({
+  state,
+  msg,
+  saveRecord: _saveRecord,
+  initialQuantity = 0,
+  closeDrawer,
+}) {
   const recordsState = useRecordsState();
-  const noticeSnackbarState = useNoticeSnackbarState();
-  const [recordCount, setRecordCount] = useState(0);
+  const [recordCount, setRecordCount] = useState(initialQuantity);
+
+  useEffect(() => {
+    setRecordCount(initialQuantity);
+  }, [initialQuantity]);
 
   const changeRecordCount = (count) => {
     if (count > 0) {
@@ -28,16 +36,17 @@ export function RecordModal({ state }) {
 
   const saveRecord = () => {
     if (recordCount == 0) return;
-    recordsState.saveRecord(recordCount);
+    _saveRecord(recordCount);
     setRecordCount(0);
     state.closeModal();
-    noticeSnackbarState.openBar(`You did ${recordCount} Sets this time.`);
   };
 
   const cancleRecord = () => {
-    setRecordCount(0);
+    setRecordCount(initialQuantity);
     state.closeModal();
+    if (closeDrawer) closeDrawer();
   };
+
   return (
     <>
       <Modal
@@ -47,7 +56,7 @@ export function RecordModal({ state }) {
       >
         <div className="bg-white rounded-[20px] p-7 w-full max-w-lg">
           <div className="select-none text-center font-bold text-2xl">
-            How many times did you do it?
+            {msg}
           </div>
           <div className="text-center">
             <span className="select-none text-[120px] font-mono text-[color:var(--mui-color-primary-main)]">

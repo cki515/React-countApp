@@ -1,11 +1,12 @@
 import { Button } from "@mui/material";
 import { CountNumber } from "../state/main";
-import { RecordModal } from "./RecordModal";
 import { useRecordsState, useRecordModalState } from "../hooks/useRecord";
+import RecordAddModal from "./RecordAddModal";
 
 function MainPage() {
   const recordsState = useRecordsState();
   const recordModalState = useRecordModalState();
+
   return (
     <div className="flex flex-1 justify-center items-center">
       <div>
@@ -20,7 +21,7 @@ function MainPage() {
           <Button variant="contained" onClick={recordModalState.openModal}>
             Record
           </Button>
-          <RecordModal state={recordModalState} />
+          <RecordAddModal state={recordModalState} />
         </div>
       </div>
     </div>

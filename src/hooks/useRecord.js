@@ -11,6 +11,7 @@ export function useRecordsState() {
   const resCount = goalCount - doneCount;
 
   const saveRecord = (count) => {
+    if (count == 0) return;
     setDoneCount(doneCount + count);
     const newRecord = {
       count: count,
@@ -24,13 +25,17 @@ export function useRecordsState() {
     if (id === null) return -1;
     if (id < 1) return -1;
     if (id > records.length) return -1;
+
     return records.length - id;
   };
 
   const removeRecordById = (id) => {
+    const record = findRecordById(id);
+    if (record == null) return;
+
     const index = findIndexById(id);
-    const record = records[index];
     if (index == -1) return;
+
     setRecords(
       produce(records, (draft) => {
         draft.splice(index, 1);
@@ -39,12 +44,38 @@ export function useRecordsState() {
     setDoneCount(doneCount - record.count);
   };
 
+  const findRecordById = (id) => {
+    const index = findIndexById(id);
+    if (index == -1) return null;
+
+    return records[index];
+  };
+
+  const modifyRecordById = (id, count) => {
+    const record = findRecordById(id);
+    if (record == null) return;
+
+    const index = findIndexById(id);
+    if (index == -1) return;
+
+    const diff = record.count - count;
+
+    setRecords(
+      produce(records, (draft) => {
+        draft[index].count = count;
+      })
+    );
+    setDoneCount(doneCount - diff);
+  };
+
   return {
     goalCount,
     saveRecord,
     resCount,
     records,
     removeRecordById,
+    findRecordById,
+    modifyRecordById,
   };
 }
 

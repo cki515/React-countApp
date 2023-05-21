@@ -1,22 +1,18 @@
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
-import ListPage from "./pages/ListPage";
-import WritePage from "./pages/WritePage";
+import MainPage from "./pages/MainPage";
+import HistoryPage from "./pages/HistoryPage";
+import Header from "./pages/Header";
+import { NoticeSnackbar } from "./state/main";
 
 function App() {
   return (
     <>
-      <header className="flex">
-        <NavLink className="font-bold p-5 hover:text-red-600" to="/list">
-          List
-        </NavLink>
-        <NavLink className="font-bold p-5 hover:text-red-600" to="/Write">
-          Write
-        </NavLink>
-      </header>
+      <Header />
+      <NoticeSnackbar />
       <Routes>
-        <Route path="/list" element={<ListPage />} />
-        <Route path="/write" element={<WritePage />} />
-        <Route path="*" element={<Navigate to="/list" />} />
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/history" element={<HistoryPage />} />
+        <Route path="*" element={<Navigate to="/history" />} />
       </Routes>
     </>
   );

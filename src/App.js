@@ -1,4 +1,4 @@
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import HistoryPage from "./pages/HistoryPage";
 import Header from "./pages/Header";

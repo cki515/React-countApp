@@ -43,7 +43,7 @@ function Root() {
         }
       }
     });
-  }, []);
+  }, [theme.palette]);
 
   return (
     <>

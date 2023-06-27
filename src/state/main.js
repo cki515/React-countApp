@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import { CountUp } from "https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.1.0/countUp.min.js";
 import useNoticeSnackbarState from "../hooks/useNotice";
 import { Alert as MuiAlert, Snackbar } from "@mui/material";
+import { CountUp } from "countup.js";
 
 function dateToStr(date) {
   //   Sat May 13 2023 19:57:36
@@ -41,18 +41,15 @@ function CountNumber({ start = 0, end = 1000, duration = 2 }) {
     }
 
     return () => {};
-  }, [end]);
+  }, [start, end, duration]);
 
   return <span ref={spanRef} />;
 }
 
-export const myConfetti = require("canvas-confetti").create(
-  document.querySelector("#confetti-canvas"),
-  {
-    resize: true,
-    useWorker: true,
-  }
-);
+export const myConfetti = require("canvas-confetti").create(document.querySelector("#confetti-canvas"), {
+  resize: true,
+  useWorker: true,
+});
 
 function NoticeSnackbar() {
   const state = useNoticeSnackbarState();
@@ -63,11 +60,7 @@ function NoticeSnackbar() {
 
   return (
     <>
-      <Snackbar
-        open={state.open}
-        autoHideDuration={state.autoHideDuration}
-        onClose={state.closeBar}
-      >
+      <Snackbar open={state.open} autoHideDuration={state.autoHideDuration} onClose={state.closeBar}>
         <Alert severity={state.severity}>{state.msg}</Alert>
       </Snackbar>
     </>

@@ -3,13 +3,7 @@ import { useEffect, useState } from "react";
 import { myConfetti } from "../state/main";
 import { useRecordsState } from "../hooks/useRecord";
 
-export function RecordModal({
-  state,
-  msg,
-  saveRecord: _saveRecord,
-  initialQuantity = 0,
-  closeDrawer,
-}) {
+export function RecordModal({ state, msg, saveRecord: _saveRecord, initialQuantity = 0, closeDrawer }) {
   const recordsState = useRecordsState();
   const [recordCount, setRecordCount] = useState(initialQuantity);
 
@@ -35,7 +29,7 @@ export function RecordModal({
   };
 
   const saveRecord = () => {
-    if (recordCount == 0) return;
+    if (recordCount === 0) return;
     _saveRecord(recordCount);
     setRecordCount(0);
     state.closeModal();
@@ -49,15 +43,9 @@ export function RecordModal({
 
   return (
     <>
-      <Modal
-        className="flex justify-center items-center"
-        open={state.open}
-        onClose={cancleRecord}
-      >
+      <Modal className="flex justify-center items-center" open={state.open} onClose={cancleRecord}>
         <div className="bg-white rounded-[20px] p-7 w-full max-w-lg">
-          <div className="select-none text-center font-bold text-2xl">
-            {msg}
-          </div>
+          <div className="select-none text-center font-bold text-2xl">{msg}</div>
           <div className="text-center">
             <span className="select-none text-[120px] font-mono text-[color:var(--mui-color-primary-main)]">
               {String(recordCount).padStart(2, "0")}

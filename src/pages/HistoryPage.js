@@ -10,13 +10,11 @@ function HistoryPage() {
   const recordOptionDrawerState = useRecordOptionDrawerState();
   const navigate = useNavigate();
 
-  if (recordsState.records.length == 0) {
+  if (recordsState.records.length === 0) {
     return (
       <div className="flex flex-1 justify-center items-center text-5xl">
         <div className="flex flex-col gap-4">
-          <span className="text-[color:var(--mui-color-primary-main)]">
-            There is no record.
-          </span>
+          <span className="text-[color:var(--mui-color-primary-main)]">There is no record.</span>
           <Button variant="contained" onClick={() => navigate(-1)}>
             Go Home
           </Button>

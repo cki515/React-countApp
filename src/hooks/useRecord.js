@@ -11,7 +11,7 @@ export function useRecordsState() {
   const resCount = goalCount - doneCount;
 
   const saveRecord = (count) => {
-    if (count == 0) return;
+    if (count === 0) return;
     setDoneCount(doneCount + count);
     const newRecord = {
       count: count,
@@ -34,7 +34,7 @@ export function useRecordsState() {
     if (record == null) return;
 
     const index = findIndexById(id);
-    if (index == -1) return;
+    if (index === -1) return;
 
     setRecords(
       produce(records, (draft) => {
@@ -46,7 +46,7 @@ export function useRecordsState() {
 
   const findRecordById = (id) => {
     const index = findIndexById(id);
-    if (index == -1) return null;
+    if (index === -1) return null;
 
     return records[index];
   };
@@ -56,7 +56,7 @@ export function useRecordsState() {
     if (record == null) return;
 
     const index = findIndexById(id);
-    if (index == -1) return;
+    if (index === -1) return;
 
     const diff = record.count - count;
 

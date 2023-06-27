@@ -18,6 +18,7 @@ Project is created with:
 - Font-awesome
 - canvas-confetti 1.6.0
 - Immer 10.0.2
+- countup.js 2.6.2
 
 ## Scope of functionalities
 
